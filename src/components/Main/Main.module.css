@@ -1,0 +1,12 @@
+.main {
+  width: 100%;
+  text-align: center;
+  flex-grow: 1;
+}
+
+.title {
+  font-family: "PT Sans", sans-serif;
+  font-size: 46px;
+  margin: 0;
+  margin-bottom: 32px;
+}

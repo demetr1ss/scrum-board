@@ -1,0 +1,15 @@
+.button {
+  font-family: "PT Sans", sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  letter-spacing: 1px;
+  color: inherit;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 5px;
+  width: 90%;
+  max-width: 620px;
+  background-color: #d7ebf3;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
