@@ -1,12 +1,12 @@
 import AddTaskButton from '../AddTaskButton/AddTaskButton';
 import styles from './Main.module.css';
-import {tasks} from '../../mock';
 import Task from '../Task/Task';
+import {tasks} from '../../mock';
 import {RuTitle} from '../../consts/const';
 
 
 export default function Main() {
-  const fieldName = Object.keys(tasks);
+  const fieldNames = Object.keys(tasks);
 
   return (
     <main className={styles.main}>
@@ -14,12 +14,12 @@ export default function Main() {
       <AddTaskButton />
       <section className="main__board board">
         <ul className={styles.list}>
-          {fieldName.map((field) => (
-            <li className={styles.item} key={field}>
-              <h2 className={styles.itemTitle}>{RuTitle[field]}</h2>
+          {fieldNames.map((fieldName) => (
+            <li className={styles.item} key={fieldName}>
+              <h2 className={styles.itemTitle}>{RuTitle[fieldName]}</h2>
               <ul className={styles.itemList}>
-                {tasks[field].map((task) => (
-                  <Task key={task.id} name={field} />
+                {tasks[fieldName].map((task) => (
+                  <Task key={task.id} task={task} fieldName={fieldName} />
                 ))}
               </ul>
             </li>

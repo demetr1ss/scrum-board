@@ -1,18 +1,22 @@
+import {TaskType} from '../../types/types';
 import styles from './Task.module.css';
 
-type TaskType = {
-  name: string;
+type TaskPropsType = {
+  task: TaskType;
+  fieldName: string;
 }
 
-export default function Task({name}: TaskType) {
+export default function Task({task, fieldName}: TaskPropsType) {
+  const {title, description} = task;
+
   return (
     <li className={`${styles.item}`}>
-      <div className={`${styles[name]} ${styles.wrapper}`}>
+      <div className={`${styles[fieldName]} ${styles.wrapper}`}>
         <h3 className={styles.title}>
-          Запланированная задача
+          {title}
         </h3>
         <p className={styles.description}>
-          Описание задачи
+          {description}
         </p>
       </div>
     </li>

@@ -1,3 +1,28 @@
 .footer {
   margin-top: auto
 }
+
+.list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 6vw;
+}
+
+.link {
+  display: block;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  outline: none;
+}
+
+.link:hover .logo,
+.link:focus .logo,
+.link:active .logo {
+  fill: #f50057;
+}
+
+.logo {
+  width: 8vw;
+  height: 8vw;
+}
