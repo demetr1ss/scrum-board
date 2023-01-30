@@ -1,6 +1,6 @@
-import AddTaskButton from '../AddTaskButton/AddTaskButton';
+import AddTaskButton from '../add-task-button/add-task-button';
 import styles from './Main.module.css';
-import Task from '../Task/Task';
+import Task from '../task/task';
 import {tasks} from '../../mock';
 import {RuTitle} from '../../consts/const';
 
