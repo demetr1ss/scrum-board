@@ -1,7 +1,7 @@
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import Main from '../../components/main/main';
-import styles from './MainPage.module.css';
+import styles from './mainPage.module.css';
 
 export default function MainPage() {
   return (
