@@ -1,4 +1,4 @@
-import styles from './AddTaskButton.module.css';
+import styles from './add-task-button.module.css';
 
 export default function AddTaskButton() {
   return (
