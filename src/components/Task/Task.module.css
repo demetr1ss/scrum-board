@@ -1,0 +1,41 @@
+.item {
+  margin-bottom: 6vw;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 65vw;
+  min-height: 65vw;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 6px;
+  border-radius: 3px;
+  box-shadow: 0px 10px 4px -4px rgba(0, 0, 0, 0.2);
+}
+
+.scheduled {
+  background-color: #ffbe0b;
+}
+
+.current {
+  background-color: #f5cac3;
+}
+
+.completed {
+  background-color: #74c69d;
+}
+
+.title {
+  font-size: 7vw;
+  line-height: 60%;
+  margin: 0;
+  padding: 6vw 0;
+}
+
+.description {
+  font-size: 6vw;
+  line-height: 80%;
+  margin: auto 0;
+  padding-bottom: 6vw;
+}

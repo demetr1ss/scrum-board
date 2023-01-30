@@ -10,3 +10,36 @@
   margin: 0;
   margin-bottom: 32px;
 }
+
+.list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.item {
+  position: relative;
+  padding-bottom: 6vw;
+}
+
+.item:not(:last-child)::before {
+  position: absolute;
+  content: "";
+  height: 1px;
+  width: 90%;
+  left: 5%;
+  bottom: 0;
+  background-color: #d9d9d9;
+  border: 1px dotted #f8f8f8;
+}
+
+.itemTitle {
+  font-family: 'PT Sans', sans-serif;
+  font-size: 10vw;
+  margin: 6vw 0 6vw;
+}
+
+.itemList {
+  list-style-type: none;
+  padding: 0;
+}
