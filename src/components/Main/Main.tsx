@@ -1,5 +1,5 @@
 import AddTaskButton from '../add-task-button/add-task-button';
-import styles from './Main.module.css';
+import styles from './main.module.css';
 import Task from '../task/task';
 import {tasks} from '../../mock';
 import {RuTitle} from '../../consts/const';

@@ -1,5 +1,5 @@
 import {TaskType} from '../../types/types';
-import styles from './Task.module.css';
+import styles from './task.module.css';
 
 type TaskPropsType = {
   task: TaskType;
