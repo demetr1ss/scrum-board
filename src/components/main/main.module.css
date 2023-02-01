@@ -43,3 +43,40 @@
   list-style-type: none;
   padding: 0;
 }
+
+
+@media (min-width: 520px) {
+  .list {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  .item {
+    padding-bottom: 20px;
+  }
+
+  .item:not(:last-child)::before {
+    position: absolute;
+    content: "";
+    height: 90%;
+    width: 1px;
+    top: 10%;
+    right: -0.8em;
+    left: auto;
+  }
+
+  .itemList {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .itemTitle {
+    font-size: 32px;
+    margin: 30px 0 30px;
+  }
+}

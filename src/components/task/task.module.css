@@ -38,4 +38,43 @@
   line-height: 100%;
   margin: auto 0;
   padding-bottom: 6vw;
+  color: #2903fa;
+}
+
+
+@media (min-width: 512px) {
+  .item {
+    margin-bottom: 20px;
+  }
+
+  .wrapper {
+    width: 25vw;
+    min-height: 25vw;
+  }
+
+  .title {
+    font-size: 3vw;
+    padding: 2.8vw 0;
+  }
+
+  .description {
+    font-size: 2vw;
+  }
+}
+
+@media (min-width: 1024px) {
+  .wrapper {
+    width: 200px;
+    min-height: 200px;
+  }
+
+  .title {
+    font-size: 24px;
+    padding: 20px 0;
+  }
+
+  .description {
+    font-size: 18px;
+    padding-bottom: 10px;
+  }
 }

@@ -3,7 +3,7 @@ type RuTitleType = {
 }
 
 export const RuTitle: RuTitleType = {
-  scheduled: 'Запланированно',
-  current: 'В работе',
-  completed: 'Завершено'
+  scheduled: 'To Do',
+  current: 'Doing',
+  completed: 'Done'
 } as const;

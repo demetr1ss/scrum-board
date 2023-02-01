@@ -26,3 +26,15 @@
   width: 8vw;
   height: 8vw;
 }
+
+@media (min-width: 512px) {
+  .logo {
+    width: 36px;
+    height: 36px;
+  }
+
+  .list {
+    margin-top: 20px;
+    gap: 40px;
+  }
+}
