@@ -1,12 +1,13 @@
 import AddTaskButton from '../add-task-button/add-task-button';
 import styles from './main.module.css';
 import Task from '../task/task';
-import {tasks} from '../../mock';
-import {RuTitle} from '../../consts/const';
-
+import {AdaptedTitle} from '../../consts/const';
+import {useAppSelector} from '../../hooks';
+import {getTasks} from '../../store/app-process/selectors';
 
 export default function Main() {
-  const fieldNames = Object.keys(tasks);
+  const tasks = useAppSelector(getTasks);
+  const fields = Object.keys(tasks);
 
   return (
     <main className={styles.main}>
@@ -14,9 +15,9 @@ export default function Main() {
       <AddTaskButton />
       <section className="main__board board">
         <ul className={styles.list}>
-          {fieldNames.map((fieldName) => (
+          {fields.map((fieldName) => (
             <li className={styles.item} key={fieldName}>
-              <h2 className={styles.itemTitle}>{RuTitle[fieldName]}</h2>
+              <h2 className={styles.itemTitle}>{AdaptedTitle[fieldName]}</h2>
               <ul className={styles.itemList}>
                 {tasks[fieldName].map((task) => (
                   <Task key={task.id} task={task} fieldName={fieldName} />
