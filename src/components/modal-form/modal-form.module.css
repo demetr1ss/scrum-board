@@ -49,6 +49,7 @@
   min-height: 230px;
   padding: 20px;
   background-color: #ffffff;
+  box-shadow: 0 0 30px 5px rgba(245, 0, 87, 0.2);
 }
 
 @media (min-width: 520px) {
