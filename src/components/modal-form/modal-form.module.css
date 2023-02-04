@@ -1,0 +1,130 @@
+.modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  background-color: rgba(0, 0, 0, 0.6);
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  scrollbar-width: none;
+}
+
+.isActive {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.wrapper {
+  position: relative;
+  display: flex;
+  flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 100%;
+  box-sizing: border-box;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  min-height: 230px;
+  padding: 20px;
+  background-color: #ffffff;
+}
+
+@media (min-width: 520px) {
+  .content {
+    width: 350px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .content {
+    width: 450px;
+  }
+}
+
+.title label,
+.description label {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.description textarea {
+  height: 120px;
+  margin-bottom: 40px;
+  max-width: 450px;
+}
+
+.title .input {
+  font-size: 20px;
+}
+
+.input {
+  font: inherit;
+  font-size: 18px;
+  background: none;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  border: 2px solid #444444;
+  width: 100%;
+  height: 40px;
+  padding: 15px 10px;
+}
+
+.input:focus {
+  outline: none;
+}
+
+.input:focus-visible {
+  outline: none;
+  border: 2px solid #f50057;;
+}
+
+.inputLabel {
+  font-size: 14px;
+  padding-left: 10px;
+  padding-top: 10px;
+}
+
+.crossButton {;
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 15px;
+}
+
+.buttonLogo {
+  fill: #444444;
+}
+
+.submitButton {
+  composes: button from "../add-task-button/add-task-button.module.css";
+  box-sizing: border-box;
+  width: 50%;
+}
+

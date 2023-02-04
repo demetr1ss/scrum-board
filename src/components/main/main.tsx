@@ -1,18 +1,24 @@
+import FocusLock from 'react-focus-lock';
 import AddTaskButton from '../add-task-button/add-task-button';
 import styles from './main.module.css';
 import Task from '../task/task';
 import {AdaptedTitle} from '../../consts/const';
 import {useAppSelector} from '../../hooks';
 import {getTasks} from '../../store/app-process/selectors';
+import {useState} from 'react';
+import {RemoveScroll} from 'react-remove-scroll';
+import ModalForm from '../modal-form/modal-form';
 
 export default function Main() {
+  const [isModalOpened, setIsModalOpened] = useState(false);
+
   const tasks = useAppSelector(getTasks);
   const fields = Object.keys(tasks);
 
   return (
     <main className={styles.main}>
       <h1 className={styles.title}>Scrum board</h1>
-      <AddTaskButton />
+      <AddTaskButton setIsModalOpened={setIsModalOpened} />
       <section className="main__board board">
         <ul className={styles.list}>
           {fields.map((fieldName) => (
@@ -27,6 +33,15 @@ export default function Main() {
           ))}
         </ul>
       </section>
+      {isModalOpened &&
+        <FocusLock>
+          <RemoveScroll enabled={isModalOpened}>
+            <ModalForm
+              isModalOpened={isModalOpened}
+              setIsModalOpened={setIsModalOpened}
+            />
+          </RemoveScroll>
+        </FocusLock>}
     </main>
   );
 }

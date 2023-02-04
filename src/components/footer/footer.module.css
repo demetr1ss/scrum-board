@@ -17,7 +17,7 @@
 }
 
 .link:hover .logo,
-.link:focus .logo,
+.link:focus-visible .logo,
 .link:active .logo {
   fill: #f50057;
 }
@@ -27,7 +27,7 @@
   height: 8vw;
 }
 
-@media (min-width: 512px) {
+@media (min-width: 520px) {
   .logo {
     width: 36px;
     height: 36px;

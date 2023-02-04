@@ -4,17 +4,18 @@
   font-size: 22px;
   color: #ffffff;
   padding: 12px 18px;
-  width: 90%;
-  max-width: 520px;
+  width: calc(80vw + 12px);
+  max-width: 504px;
   background: none;
   background-color: #f50057;
   border: 3px solid #f50057;
   cursor: pointer;
   margin-bottom: 32px;
+  text-transform: uppercase;
 }
 
 .button:hover,
-.button:focus,
+.button:focus-visible,
 .button:active {
   color: #f50057;
   background: none;

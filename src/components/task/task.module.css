@@ -5,7 +5,7 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  width: 65vw;
+  width: 80vw;
   min-height: 65vw;
   max-width: 400px;
   margin: 0 auto;
@@ -42,7 +42,7 @@
 }
 
 
-@media (min-width: 512px) {
+@media (min-width: 520px) {
   .item {
     margin-bottom: 20px;
   }
