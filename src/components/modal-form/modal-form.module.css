@@ -72,9 +72,10 @@
 }
 
 .description textarea {
-  height: 120px;
+  min-height: 120px;
   margin-bottom: 40px;
   max-width: 450px;
+  overflow-x: hidden;
 }
 
 .title .input {

@@ -13,7 +13,9 @@
     "react-redux": "^8.0.4",
     "react-remove-scroll": "^2.5.5",
     "react-router-dom": "^6.4.2",
-    "react-scripts": "5.0.1"
+    "react-scripts": "5.0.1",
+    "react-textarea-autosize": "^8.4.0",
+    "react-wrap-balancer": "^0.4.0"
   },
   "scripts": {
     "start": "react-scripts start",

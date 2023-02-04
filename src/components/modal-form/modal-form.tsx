@@ -1,5 +1,7 @@
+import TextareaAutosize from 'react-textarea-autosize';
 import styles from './modal-form.module.css';
 import {useState} from 'react';
+import useKeydown from '../../hooks/use-key-down';
 
 type ModalFormPropsType = {
   isModalOpened: boolean;
@@ -8,6 +10,8 @@ type ModalFormPropsType = {
 
 export default function ModalForm({isModalOpened, setIsModalOpened}: ModalFormPropsType) {
   const [isFormDisabled, setIsFormDisabled] = useState(false);
+
+  useKeydown('Escape', () => setIsModalOpened(false));
 
   // eslint-disable-next-line no-console
   console.log(setIsFormDisabled);
@@ -24,7 +28,7 @@ export default function ModalForm({isModalOpened, setIsModalOpened}: ModalFormPr
                 <span className={styles.inputLabel}>
                   Заголовок
                 </span>
-                <input className={styles.input} type="text" placeholder='Заголовок задачи' />
+                <input className={styles.input} type="text" placeholder='Заголовок задачи' required />
               </label>
             </div>
 
@@ -33,7 +37,7 @@ export default function ModalForm({isModalOpened, setIsModalOpened}: ModalFormPr
                 <span className={styles.inputLabel}>
                   Описание
                 </span>
-                <textarea className={styles.input} placeholder='Описание задачи' />
+                <TextareaAutosize className={styles.input} placeholder='Описание задачи' required />
               </label>
             </div>
             <button className={styles.submitButton} type="submit">
