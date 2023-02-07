@@ -1,7 +1,15 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import TextareaAutosize from 'react-textarea-autosize';
 import styles from './modal-form.module.css';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import useKeydown from '../../hooks/use-key-down';
+import {useAppDispatch, useAppSelector} from '../../hooks';
+import {getTaksSendingStatus} from '../../store/app-process/selectors';
+import {LoadingStatus} from '../../consts/const';
+import {useForm} from 'react-hook-form';
+import {TaskType} from '../../types/types';
+import {sendTask} from '../../store/api-actions';
+import {changeTaskSendingStatus} from '../../store/app-process/app-process';
 
 type ModalFormPropsType = {
   isModalOpened: boolean;
@@ -9,12 +17,48 @@ type ModalFormPropsType = {
 }
 
 export default function ModalForm({isModalOpened, setIsModalOpened}: ModalFormPropsType) {
+  const dispatch = useAppDispatch();
   const [isFormDisabled, setIsFormDisabled] = useState(false);
+  const taskSendingStatus = useAppSelector(getTaksSendingStatus);
 
   useKeydown('Escape', () => setIsModalOpened(false));
 
-  // eslint-disable-next-line no-console
-  console.log(setIsFormDisabled);
+  const {register, handleSubmit, formState: {errors}} = useForm<TaskType>({
+    mode: 'all',
+    defaultValues: {
+      id: 'number.int',
+    }
+  });
+
+  const onSubmit = (task: TaskType) => {
+    const formDate = {
+      ...task,
+      title: `custom.value(${task.title})`,
+      description: `custom.value(${task.description})`
+    };
+
+    dispatch(sendTask(formDate));
+  };
+
+
+  useEffect(() => {
+    switch (taskSendingStatus) {
+      case LoadingStatus.Fulfilled:
+        setIsFormDisabled(false);
+        setIsModalOpened(false);
+        dispatch(changeTaskSendingStatus(LoadingStatus.Idle));
+        break;
+      case LoadingStatus.Idle:
+        setIsFormDisabled(false);
+        break;
+      case LoadingStatus.Pending:
+        setIsFormDisabled(true);
+        break;
+      case LoadingStatus.Rejected:
+        setIsFormDisabled(false);
+        break;
+    }
+  }, [dispatch, setIsModalOpened, taskSendingStatus]);
 
   return (
     <div className={`${styles.modal} ${isModalOpened ? styles.isActive : ''}`}>
@@ -22,14 +66,24 @@ export default function ModalForm({isModalOpened, setIsModalOpened}: ModalFormPr
         <div className={styles.overlay} onClick={() => setIsModalOpened(false)}>
         </div>
         <div className={styles.content}>
-          <form method="post">
+          <form method="post" onSubmit={handleSubmit(onSubmit)}>
             <div className={styles.title}>
               <label>
                 <span className={styles.inputLabel}>
                   Заголовок
                 </span>
-                <input className={styles.input} type="text" placeholder='Заголовок задачи' required />
+                <input
+                  className={styles.input}
+                  type="text"
+                  placeholder='Заголовок задачи'
+                  autoFocus
+                  autoComplete="off"
+                  {...register('title', {
+                    required: true
+                  })}
+                />
               </label>
+              {errors?.title && <p className={styles.error}>Нужно указать заголовок</p>}
             </div>
 
             <div className={styles.description}>
@@ -37,10 +91,17 @@ export default function ModalForm({isModalOpened, setIsModalOpened}: ModalFormPr
                 <span className={styles.inputLabel}>
                   Описание
                 </span>
-                <TextareaAutosize className={styles.input} placeholder='Описание задачи' required />
+                <TextareaAutosize
+                  className={styles.input}
+                  placeholder='Описание задачи'
+                  {...register('description', {
+                    required: true
+                  })}
+                />
               </label>
+              {errors.description && <p className={styles.error}>Нужно указать описание</p>}
             </div>
-            <button className={styles.submitButton} type="submit">
+            <button className={styles.submitButton} type="submit" disabled={isFormDisabled}>
               {isFormDisabled ? 'Adding..' : 'Add Task'}
             </button>
           </form>

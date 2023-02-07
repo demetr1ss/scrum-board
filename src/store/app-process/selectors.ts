@@ -7,3 +7,6 @@ export const getTasks = (state: StateType): TasksType =>
 
 export const getTasksLoadingStatus = (state: StateType): LoadingStatus =>
   state.tasksLoadingStatus;
+
+export const getTaksSendingStatus = (state: StateType): LoadingStatus =>
+  state.taskSendingStatus;
