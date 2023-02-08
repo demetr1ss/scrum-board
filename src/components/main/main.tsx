@@ -13,7 +13,7 @@ export default function Main() {
   const [isModalOpened, setIsModalOpened] = useState(false);
 
   const tasks = useAppSelector(getTasks);
-  const fields = Object.keys(tasks);
+  const fields = Object.keys(AdaptedTitle);
 
   return (
     <main className={styles.main}>
@@ -22,12 +22,12 @@ export default function Main() {
       <section className="main__board board">
         <ul className={styles.list}>
           {fields.map((fieldName) => (
-            <li className={styles.item} key={fieldName}>
+            <li className={`${styles.item} ${styles[fieldName]}`} key={fieldName}>
               <h2 className={styles.itemTitle}>{AdaptedTitle[fieldName]}</h2>
               <ul className={styles.itemList}>
-                {tasks[fieldName].map((task) => (
-                  <Task key={task.id} task={task} fieldName={fieldName} />
-                ))}
+                {tasks.map((task) => task[fieldName as keyof typeof task] === true
+                  ? <Task key={task.id} task={task} fieldName={fieldName} />
+                  : '')}
               </ul>
             </li>
           ))}

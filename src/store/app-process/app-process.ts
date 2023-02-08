@@ -1,10 +1,10 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {LoadingStatus} from '../../consts/const';
-import {TasksType} from '../../types/types';
-import {fetchTasks, sendTask} from '../api-actions';
+import {FetchingTasksType} from '../../types/types';
+import {fetchTasks} from '../api-actions';
 
 const initialState = {
-  tasks: {} as TasksType,
+  tasks: {} as FetchingTasksType,
   tasksLoadingStatus: LoadingStatus.Idle,
   taskSendingStatus: LoadingStatus.Idle,
 };
@@ -28,17 +28,17 @@ export const appProcess = createSlice({
       })
       .addCase(fetchTasks.rejected, (state) => {
         state.tasksLoadingStatus = LoadingStatus.Rejected;
-      })
-      .addCase(sendTask.fulfilled, (state, action) => {
-        state.tasks.scheduled.push(action.payload);
-        state.taskSendingStatus = LoadingStatus.Fulfilled;
-      })
-      .addCase(sendTask.pending, (state) => {
-        state.taskSendingStatus = LoadingStatus.Pending;
-      })
-      .addCase(sendTask.rejected, (state) => {
-        state.taskSendingStatus = LoadingStatus.Rejected;
       });
+    // .addCase(sendTask.fulfilled, (state, action) => {
+    //   state.tasks.scheduled.push(action.payload);
+    //   state.taskSendingStatus = LoadingStatus.Fulfilled;
+    // })
+    // .addCase(sendTask.pending, (state) => {
+    //   state.taskSendingStatus = LoadingStatus.Pending;
+    // })
+    // .addCase(sendTask.rejected, (state) => {
+    //   state.taskSendingStatus = LoadingStatus.Rejected;
+    // });
   }
 });
 

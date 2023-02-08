@@ -25,9 +25,6 @@ export default function ModalForm({isModalOpened, setIsModalOpened}: ModalFormPr
 
   const {register, handleSubmit, formState: {errors}} = useForm<TaskType>({
     mode: 'all',
-    defaultValues: {
-      id: 'number.int',
-    }
   });
 
   const onSubmit = (task: TaskType) => {
