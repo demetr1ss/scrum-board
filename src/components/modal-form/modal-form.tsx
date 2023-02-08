@@ -25,16 +25,15 @@ export default function ModalForm({isModalOpened, setIsModalOpened}: ModalFormPr
 
   const {register, handleSubmit, formState: {errors}} = useForm<TaskType>({
     mode: 'all',
+    defaultValues: {
+      scheduled: true,
+      current: false,
+      completed: false
+    }
   });
 
   const onSubmit = (task: TaskType) => {
-    const formDate = {
-      ...task,
-      title: `custom.value(${task.title})`,
-      description: `custom.value(${task.description})`
-    };
-
-    dispatch(sendTask(formDate));
+    dispatch(sendTask(task));
   };
 
 

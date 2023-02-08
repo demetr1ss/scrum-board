@@ -1,7 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {LoadingStatus} from '../../consts/const';
 import {FetchingTasksType} from '../../types/types';
-import {fetchTasks} from '../api-actions';
+import {fetchTasks, sendTask} from '../api-actions';
 
 const initialState = {
   tasks: {} as FetchingTasksType,
@@ -28,17 +28,18 @@ export const appProcess = createSlice({
       })
       .addCase(fetchTasks.rejected, (state) => {
         state.tasksLoadingStatus = LoadingStatus.Rejected;
+      })
+      .addCase(sendTask.fulfilled, (state, action) => {
+        const {id, task} = action.payload;
+        state.tasks[id] = task;
+        state.taskSendingStatus = LoadingStatus.Fulfilled;
+      })
+      .addCase(sendTask.pending, (state) => {
+        state.taskSendingStatus = LoadingStatus.Pending;
+      })
+      .addCase(sendTask.rejected, (state) => {
+        state.taskSendingStatus = LoadingStatus.Rejected;
       });
-    // .addCase(sendTask.fulfilled, (state, action) => {
-    //   state.tasks.scheduled.push(action.payload);
-    //   state.taskSendingStatus = LoadingStatus.Fulfilled;
-    // })
-    // .addCase(sendTask.pending, (state) => {
-    //   state.taskSendingStatus = LoadingStatus.Pending;
-    // })
-    // .addCase(sendTask.rejected, (state) => {
-    //   state.taskSendingStatus = LoadingStatus.Rejected;
-    // });
   }
 });
 
