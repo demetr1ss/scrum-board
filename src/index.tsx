@@ -1,16 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './components/app/app';
-import {BrowserRouter} from 'react-router-dom';
-import {store} from './store';
 import {Provider} from 'react-redux';
+import {BrowserRouter} from 'react-router-dom';
+import App from './components/app/app';
+import {store} from './store';
 import {fetchTasks} from './store/api-actions';
 
 store.dispatch(fetchTasks());
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement,
-);
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
 root.render(
   <React.StrictMode>
@@ -19,5 +17,5 @@ root.render(
         <App />
       </BrowserRouter>
     </Provider>
-  </React.StrictMode>,
+  </React.StrictMode>
 );

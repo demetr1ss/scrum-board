@@ -1,7 +1,7 @@
 export const AdaptedTitle: {[key: string]: string} = {
   scheduled: 'To Do',
   current: 'Doing',
-  completed: 'Done'
+  completed: 'Done',
 } as const;
 
 export const enum LoadingStatus {

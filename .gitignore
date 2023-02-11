@@ -16,6 +16,7 @@ Thumbs.db
 .DS_Store
 .env
 *.log*
+.prettierrc
 
 npm-debug.log*
 yarn-debug.log*

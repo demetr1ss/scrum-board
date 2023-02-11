@@ -91,7 +91,6 @@
   font-size: 20px;
 }
 
-
 .input {
   font: inherit;
   font-size: 18px;
@@ -111,17 +110,17 @@
 
 .input:focus-visible {
   outline: none;
-  border: 2px solid #f50057;;
+  border: 2px solid #f50057;
 }
 
 .inputLabel {
-  font-family: "PT Sans", sans-serif;
+  font-family: 'PT Sans', sans-serif;
   font-size: 14px;
   padding-left: 10px;
   padding-top: 10px;
 }
 
-.crossButton {;
+.crossButton {
   background: none;
   border: none;
   cursor: pointer;
@@ -136,7 +135,7 @@
 }
 
 .submitButton {
-  composes: button from "../add-task-button/add-task-button.module.css";
+  composes: button from '../add-task-button/add-task-button.module.css';
   box-sizing: border-box;
   width: 50%;
   margin-top: 40px;
@@ -148,7 +147,7 @@
 }
 
 .error {
-  font-family: "PT Sans", sans-serif;
+  font-family: 'PT Sans', sans-serif;
   position: absolute;
   margin: 0;
   bottom: -20px;

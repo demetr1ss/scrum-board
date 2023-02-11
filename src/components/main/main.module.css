@@ -5,7 +5,7 @@
 }
 
 .title {
-  font-family: "PT Sans", sans-serif;
+  font-family: 'PT Sans', sans-serif;
   font-size: 46px;
   margin: 0;
   margin-bottom: 32px;
@@ -36,7 +36,7 @@
 
 .item:not(:last-child)::before {
   position: absolute;
-  content: "";
+  content: '';
   height: 1px;
   width: 90%;
   left: 5%;
@@ -56,7 +56,6 @@
   padding: 0;
 }
 
-
 @media (min-width: 520px) {
   .list {
     display: grid;
@@ -72,7 +71,7 @@
 
   .item:not(:last-child)::before {
     position: absolute;
-    content: "";
+    content: '';
     height: 90%;
     width: 1px;
     top: 5%;

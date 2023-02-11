@@ -5,7 +5,7 @@ export type TaskType = {
   id: string;
   title: string;
   description: string;
-}
+};
 
 export type TaskNoIdType = {
   completed: boolean;
@@ -13,13 +13,13 @@ export type TaskNoIdType = {
   scheduled: boolean;
   title: string;
   description: string;
-}
+};
 
 export type TasksType = TaskType[];
 
 export type FetchingTasksType = {
   [key: string]: TaskNoIdType;
-}
+};
 
 export type SendTaskType = {
   id: string;

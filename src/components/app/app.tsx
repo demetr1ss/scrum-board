@@ -8,19 +8,13 @@ import {getTasksLoadingStatus} from '../../store/app-process/selectors';
 export default function App(): JSX.Element {
   const tasksLoadingStatus = useAppSelector(getTasksLoadingStatus);
 
-  if (
-    tasksLoadingStatus === LoadingStatus.Idle ||
-    tasksLoadingStatus === LoadingStatus.Pending
-  ) {
+  if (tasksLoadingStatus === LoadingStatus.Idle || tasksLoadingStatus === LoadingStatus.Pending) {
     return <LoadingScreen />;
   }
 
   return (
     <Routes>
-      <Route
-        path='/'
-        element={<MainPage />}
-      />
+      <Route path='/' element={<MainPage />} />
     </Routes>
   );
 }

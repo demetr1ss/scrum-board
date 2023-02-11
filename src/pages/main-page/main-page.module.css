@@ -1,46 +1,47 @@
 @font-face {
-  font-family: "PT Sans";
+  font-family: 'PT Sans';
   font-style: normal;
   font-weight: 400;
-  src: url("../../../public/fonts/ptsans.woff") format("woff");
+  src: url('../../../public/fonts/ptsans.woff') format('woff');
   font-display: swap;
 }
 
 @font-face {
-  font-family: "PT Sans";
+  font-family: 'PT Sans';
   font-style: normal;
   font-weight: 400;
-  src: url("../../../public/fonts/ptsans.woff2") format("woff2");
+  src: url('../../../public/fonts/ptsans.woff2') format('woff2');
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Virgil";
+  font-family: 'Virgil';
   font-style: normal;
   font-weight: 400;
-  src: url("../../../public/fonts/Virgil.woff2") format("woff2");
+  src: url('../../../public/fonts/Virgil.woff2') format('woff2');
   font-display: swap;
 }
 
 @font-face {
-  font-family: "PT Sans";
+  font-family: 'PT Sans';
   font-style: normal;
   font-weight: 700;
-  src: url("../../../public/fonts/ptsansbold.woff") format("woff");
+  src: url('../../../public/fonts/ptsansbold.woff') format('woff');
   font-display: swap;
 }
 
 @font-face {
-  font-family: "PT Sans";
+  font-family: 'PT Sans';
   font-style: normal;
   font-weight: 700;
-  src: url("../../../public/fonts/ptsansbold.woff2") format("woff2");
+  src: url('../../../public/fonts/ptsansbold.woff2') format('woff2');
   font-display: swap;
 }
 
-html, body {
+html,
+body {
   margin: 0;
-  font-family: "Virgil", sans-serif;
+  font-family: 'Virgil', sans-serif;
   font-weight: 400;
   font-size: 16px;
   color: #444444;
