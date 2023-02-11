@@ -12,7 +12,7 @@ export const fetchTasks = createAsyncThunk<FetchingTasksType, undefined, {
   async (_arg, {extra: api}) => {
     const {data} = await api.get<FetchingTasksType>('tasks.json');
 
-    return data;
+    return data ? data : {};
   }
 );
 
@@ -30,5 +30,18 @@ export const sendTask = createAsyncThunk<SendTaskType, TaskNoIdType, {
     };
 
     return payload;
+  }
+);
+
+export const deleteTask = createAsyncThunk<string, string, {
+  dispatch: AppDispatchType;
+  state: StateType;
+  extra: AxiosInstance;
+}>(
+  'data/deleteTask',
+  async (id, {extra: api}) => {
+    await api.delete(`tasks/${id}.json`);
+
+    return id;
   }
 );

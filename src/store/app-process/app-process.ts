@@ -1,7 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {LoadingStatus} from '../../consts/const';
 import {FetchingTasksType} from '../../types/types';
-import {fetchTasks, sendTask} from '../api-actions';
+import {deleteTask, fetchTasks, sendTask} from '../api-actions';
 
 const initialState = {
   tasks: {} as FetchingTasksType,
@@ -39,6 +39,10 @@ export const appProcess = createSlice({
       })
       .addCase(sendTask.rejected, (state) => {
         state.taskSendingStatus = LoadingStatus.Rejected;
+      })
+      .addCase(deleteTask.fulfilled, (state, action) => {
+        const id = action.payload;
+        delete state.tasks[id];
       });
   }
 });

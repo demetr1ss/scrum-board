@@ -25,7 +25,7 @@ export default function Main() {
             <li className={`${styles.item} ${styles[fieldName]}`} key={fieldName}>
               <h2 className={styles.itemTitle}>{AdaptedTitle[fieldName]}</h2>
               <ul className={styles.itemList}>
-                {tasks.map((task) => task[fieldName as keyof typeof task] === true
+                {tasks?.map((task) => task[fieldName as keyof typeof task] === true
                   ? <Task key={task.id} task={task} fieldName={fieldName} />
                   : '')}
               </ul>

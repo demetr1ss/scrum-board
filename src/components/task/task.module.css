@@ -2,7 +2,36 @@
   margin-bottom: 6vw;
 }
 
+.item:hover {
+  filter: brightness(85%);
+  cursor: grab;
+}
+
+.item:active {
+  cursor: grabbing;
+}
+
+.tools {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.toolButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 7px 10px;
+}
+
+.toolButton:hover,
+.toolButton:focus-visible,
+.toolButton:active {
+  fill: #f50057;
+}
+
 .wrapper {
+  position: relative;
   display: flex;
   flex-direction: column;
   width: 80vw;
@@ -30,7 +59,7 @@
   font-size: 7vw;
   line-height: 120%;
   margin: 0;
-  padding: 6vw 0;
+  padding: 8vw 0;
 }
 
 .description {
@@ -70,7 +99,7 @@
 
   .title {
     font-size: 24px;
-    padding: 20px 0;
+    padding: 30px 0 20px 0;
   }
 
   .description {
