@@ -17,6 +17,9 @@ export const appProcess = createSlice({
     changeTaskSendingStatus: (state, action: {payload: LoadingStatus; type: string}) => {
       state.taskSendingStatus = action.payload;
     },
+    changeTaskEditingStatus: (state, action: {payload: LoadingStatus; type: string}) => {
+      state.taskEditingStatus = action.payload;
+    }
   },
   extraReducers(builder) {
     builder
@@ -59,4 +62,4 @@ export const appProcess = createSlice({
   },
 });
 
-export const {changeTaskSendingStatus} = appProcess.actions;
+export const {changeTaskSendingStatus, changeTaskEditingStatus} = appProcess.actions;

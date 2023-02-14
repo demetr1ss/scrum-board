@@ -1,29 +1,33 @@
 import {DragEvent, useState} from 'react';
 import FocusLock from 'react-focus-lock';
 import {RemoveScroll} from 'react-remove-scroll';
-import {AdaptedTitle} from '../../const/const';
+import {AdaptedTitle, Title} from '../../const/const';
 import {useAppSelector} from '../../hooks';
 import {getTasks} from '../../store/app-process/selectors';
+import {TaskType} from '../../types/types';
 import AddTaskButton from '../add-task-button/add-task-button';
-import ModalForm from '../modal-form/modal-form';
+import AddNewTaskModalForm from '../add-new-task-modal-form/add-new-task-modal-form';
 import Task from '../task/task';
 import styles from './main.module.css';
+import EditTaskModalForm from '../edit-task-modal-form/edit-task-modal-form';
 
 export default function Main() {
-  const [isModalOpened, setIsModalOpened] = useState(false);
+  const [isAddNewTaskModalOpened, setIsAddNewTaskModalOpened] = useState(false);
+  const [isEditTaskModalOpened, setIsEditTaskModalOpened] = useState(false);
   const [currentDroppableBoard, setCurrentDroppableBoard] = useState<string>('');
+  const [currentTask, setCurrentTask] = useState({} as TaskType);
 
   const dragOverHandler = (e: DragEvent<HTMLLIElement>) => {
     e.preventDefault();
   };
 
   const tasks = useAppSelector(getTasks);
-  const fields = Object.keys(AdaptedTitle);
+  const fields = Object.keys(Title);
 
   return (
     <main className={styles.main}>
       <h1 className={styles.title}>Scrum board</h1>
-      <AddTaskButton setIsModalOpened={setIsModalOpened} />
+      <AddTaskButton setIsModalOpened={setIsAddNewTaskModalOpened} />
       <section className='main__board board'>
         <ul className={styles.list}>
           {fields.map((fieldName) => (
@@ -43,7 +47,8 @@ export default function Main() {
                       task={task}
                       fieldName={fieldName}
                       currentDroppableBoard={currentDroppableBoard}
-                      setIsModalOpened={setIsModalOpened}
+                      setCurrentTask={setCurrentTask}
+                      setIsEditTaskModalOpened={setIsEditTaskModalOpened}
                     />
                   ) : (
                     ''
@@ -54,10 +59,24 @@ export default function Main() {
           ))}
         </ul>
       </section>
-      {isModalOpened && (
+      {isAddNewTaskModalOpened && (
         <FocusLock>
-          <RemoveScroll enabled={isModalOpened}>
-            <ModalForm isModalOpened={isModalOpened} setIsModalOpened={setIsModalOpened} />
+          <RemoveScroll enabled={isAddNewTaskModalOpened}>
+            <AddNewTaskModalForm
+              isAddNewTaskModalOpened={isAddNewTaskModalOpened}
+              setIsAddNewTaskModalOpened={setIsAddNewTaskModalOpened}
+            />
+          </RemoveScroll>
+        </FocusLock>
+      )}
+      {isEditTaskModalOpened && (
+        <FocusLock>
+          <RemoveScroll enabled={isAddNewTaskModalOpened}>
+            <EditTaskModalForm
+              isEditTaskModalOpened={isEditTaskModalOpened}
+              setIsEditTaskModalOpened={setIsEditTaskModalOpened}
+              currentTask={currentTask}
+            />
           </RemoveScroll>
         </FocusLock>
       )}

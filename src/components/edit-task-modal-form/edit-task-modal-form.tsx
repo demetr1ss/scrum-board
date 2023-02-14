@@ -1,27 +1,28 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import TextareaAutosize from 'react-textarea-autosize';
-import styles from './modal-form.module.css';
+import styles from '../add-new-task-modal-form/add-new-task-modal-form.module.css';
 import {useEffect, useState} from 'react';
 import useKeydown from '../../hooks/use-key-down';
 import {useAppDispatch, useAppSelector} from '../../hooks';
-import {getTaskSendingStatus} from '../../store/app-process/selectors';
+import {getTaskEditingStatus} from '../../store/app-process/selectors';
 import {LoadingStatus} from '../../const/const';
 import {useForm} from 'react-hook-form';
 import {TaskType} from '../../types/types';
-import {sendTask} from '../../store/api-actions';
-import {changeTaskSendingStatus} from '../../store/app-process/app-process';
+import {editTask} from '../../store/api-actions';
+import {changeTaskEditingStatus} from '../../store/app-process/app-process';
 
-type ModalFormPropsType = {
-  isModalOpened: boolean;
-  setIsModalOpened: (status: boolean) => void;
+type EditTaskModalFormPropsType = {
+  isEditTaskModalOpened: boolean;
+  setIsEditTaskModalOpened: (status: boolean) => void;
+  currentTask: TaskType;
 };
 
-export default function ModalForm({isModalOpened, setIsModalOpened}: ModalFormPropsType) {
+export default function EditTaskModalForm({isEditTaskModalOpened, setIsEditTaskModalOpened, currentTask}: EditTaskModalFormPropsType) {
   const dispatch = useAppDispatch();
   const [isFormDisabled, setIsFormDisabled] = useState(false);
-  const taskSendingStatus = useAppSelector(getTaskSendingStatus);
+  const taskEditingStatus = useAppSelector(getTaskEditingStatus);
 
-  useKeydown('Escape', () => setIsModalOpened(false));
+  useKeydown('Escape', () => setIsEditTaskModalOpened(false));
 
   const {
     register,
@@ -30,22 +31,23 @@ export default function ModalForm({isModalOpened, setIsModalOpened}: ModalFormPr
   } = useForm<TaskType>({
     mode: 'all',
     defaultValues: {
-      scheduled: true,
-      current: false,
-      completed: false,
+      id: currentTask.id,
+      scheduled: currentTask.scheduled,
+      current: currentTask.current,
+      completed: currentTask.completed,
     },
   });
 
   const onSubmit = (task: TaskType) => {
-    dispatch(sendTask(task));
+    dispatch(editTask(task));
   };
 
   useEffect(() => {
-    switch (taskSendingStatus) {
+    switch (taskEditingStatus) {
       case LoadingStatus.Fulfilled:
         setIsFormDisabled(false);
-        setIsModalOpened(false);
-        dispatch(changeTaskSendingStatus(LoadingStatus.Idle));
+        setIsEditTaskModalOpened(false);
+        dispatch(changeTaskEditingStatus(LoadingStatus.Idle));
         break;
       case LoadingStatus.Idle:
         setIsFormDisabled(false);
@@ -57,12 +59,12 @@ export default function ModalForm({isModalOpened, setIsModalOpened}: ModalFormPr
         setIsFormDisabled(false);
         break;
     }
-  }, [dispatch, setIsModalOpened, taskSendingStatus]);
+  }, [dispatch, setIsEditTaskModalOpened, taskEditingStatus]);
 
   return (
-    <div className={`${styles.modal} ${isModalOpened ? styles.isActive : ''}`}>
+    <div className={`${styles.modal} ${isEditTaskModalOpened ? styles.isActive : ''}`}>
       <div className={styles.wrapper}>
-        <div className={styles.overlay} onClick={() => setIsModalOpened(false)}></div>
+        <div className={styles.overlay} onClick={() => setIsEditTaskModalOpened(false)}></div>
         <div className={styles.content}>
           <form method='post' onSubmit={handleSubmit(onSubmit)}>
             <div className={styles.title}>
@@ -74,6 +76,7 @@ export default function ModalForm({isModalOpened, setIsModalOpened}: ModalFormPr
                   placeholder='Заголовок задачи'
                   autoFocus
                   autoComplete='off'
+                  defaultValue={currentTask.title}
                   {...register('title', {
                     required: true,
                   })}
@@ -88,6 +91,7 @@ export default function ModalForm({isModalOpened, setIsModalOpened}: ModalFormPr
                 <TextareaAutosize
                   className={styles.input}
                   placeholder='Описание задачи'
+                  defaultValue={currentTask.description}
                   {...register('description', {
                     required: true,
                   })}
@@ -96,14 +100,14 @@ export default function ModalForm({isModalOpened, setIsModalOpened}: ModalFormPr
               {errors.description && <p className={styles.error}>Нужно указать описание</p>}
             </div>
             <button className={styles.submitButton} type='submit' disabled={isFormDisabled}>
-              {isFormDisabled ? 'Adding..' : 'Add Task'}
+              {isFormDisabled ? 'Saving...' : 'Save'}
             </button>
           </form>
           <button
             className={styles.crossButton}
             type='button'
             aria-label='Закрыть попап'
-            onClick={() => setIsModalOpened(false)}
+            onClick={() => setIsEditTaskModalOpened(false)}
           >
             <svg
               className={styles.buttonLogo}
