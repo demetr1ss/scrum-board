@@ -4,8 +4,8 @@ import styles from './modal-form.module.css';
 import {useEffect, useState} from 'react';
 import useKeydown from '../../hooks/use-key-down';
 import {useAppDispatch, useAppSelector} from '../../hooks';
-import {getTaksSendingStatus} from '../../store/app-process/selectors';
-import {LoadingStatus} from '../../consts/const';
+import {getTaskSendingStatus} from '../../store/app-process/selectors';
+import {LoadingStatus} from '../../const/const';
 import {useForm} from 'react-hook-form';
 import {TaskType} from '../../types/types';
 import {sendTask} from '../../store/api-actions';
@@ -19,7 +19,7 @@ type ModalFormPropsType = {
 export default function ModalForm({isModalOpened, setIsModalOpened}: ModalFormPropsType) {
   const dispatch = useAppDispatch();
   const [isFormDisabled, setIsFormDisabled] = useState(false);
-  const taskSendingStatus = useAppSelector(getTaksSendingStatus);
+  const taskSendingStatus = useAppSelector(getTaskSendingStatus);
 
   useKeydown('Escape', () => setIsModalOpened(false));
 

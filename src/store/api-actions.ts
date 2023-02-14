@@ -1,7 +1,7 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AxiosInstance} from 'axios';
 import {AppDispatchType, StateType} from '../types/store-type';
-import {FetchingTasksType, TaskNoIdType, SendTaskType} from '../types/types';
+import {FetchingTasksType, TaskNoIdType, SendTaskType, TaskType} from '../types/types';
 
 export const fetchTasks = createAsyncThunk<
   FetchingTasksType,
@@ -47,4 +47,23 @@ export const deleteTask = createAsyncThunk<
   await api.delete(`tasks/${id}.json`);
 
   return id;
+});
+
+export const editTask = createAsyncThunk<
+  SendTaskType,
+  TaskType,
+  {
+    dispatch: AppDispatchType;
+    state: StateType;
+    extra: AxiosInstance;
+  }
+>('data/editTask', async (task, {extra: api}) => {
+  const {id, ...taskNoId} = task;
+  const {data} = await api.patch<TaskNoIdType>(`tasks/${task.id}.json`, taskNoId);
+  const payload = {
+    id,
+    task: data,
+  };
+
+  return payload;
 });
