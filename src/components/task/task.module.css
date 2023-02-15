@@ -2,8 +2,8 @@
   margin-bottom: 6vw;
 }
 
-.item:hover {
-  filter: brightness(85%);
+.item:hover > div {
+  box-shadow: rgb(0 16 61 / 11%) 0px 10px 24px;
   cursor: grab;
 }
 
@@ -41,7 +41,12 @@
   padding: 6px;
   border-radius: 1px 1px 4px 4px;
   box-shadow: 0px 10px 4px -4px rgba(0, 0, 0, 0.2);
+  transition-duration: 0.5s;
+  transition-timing-function: ease;
+  transition-delay: 0s;
+  transition-property: box-shadow;
 }
+
 
 .scheduled {
   background-color: #fcf6bd;
