@@ -86,6 +86,7 @@ export default function AddNewTaskModalForm({isAddNewTaskModalOpened: isModalOpe
               <label>
                 <span className={styles.inputLabel}>Описание</span>
                 <TextareaAutosize
+                  cacheMeasurements
                   className={styles.input}
                   placeholder='Описание задачи'
                   {...register('description', {

@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import {useAppDispatch} from '../../hooks';
-import {deleteTask, editTask} from '../../store/api-actions';
+import {editTask} from '../../store/api-actions';
 import {TaskType} from '../../types/types';
 import styles from './task.module.css';
 
@@ -10,6 +10,7 @@ type TaskPropsType = {
   currentDroppableBoard: string;
   setCurrentTask: (task: TaskType) => void;
   setIsEditTaskModalOpened: (status: boolean) => void;
+  setIsConfirmModalOpened: (status: boolean) => void;
 };
 
 export default function Task({
@@ -18,18 +19,20 @@ export default function Task({
   currentDroppableBoard,
   setCurrentTask,
   setIsEditTaskModalOpened,
+  setIsConfirmModalOpened,
 }: TaskPropsType) {
   const dispatch = useAppDispatch();
   const [isToolsVisible, setIsToolsVisible] = useState(false);
-  const {title, description, id} = task;
-
-  const onDeleteButtonClick = () => {
-    dispatch(deleteTask(id));
-  };
+  const {title, description} = task;
 
   const onEditButtonClick = () => {
     setCurrentTask(task);
     setIsEditTaskModalOpened(true);
+  };
+
+  const onDeleteButtonClick = () => {
+    setCurrentTask(task);
+    setIsConfirmModalOpened(true);
   };
 
   const dragEndHandler = (item: TaskType, currentBoard: string) => {

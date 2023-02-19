@@ -8,6 +8,7 @@ const initialState = {
   tasksLoadingStatus: LoadingStatus.Idle,
   taskSendingStatus: LoadingStatus.Idle,
   taskEditingStatus: LoadingStatus.Idle,
+  taskDeletingStatus: LoadingStatus.Idle,
 };
 
 export const appProcess = createSlice({
@@ -19,7 +20,10 @@ export const appProcess = createSlice({
     },
     changeTaskEditingStatus: (state, action: {payload: LoadingStatus; type: string}) => {
       state.taskEditingStatus = action.payload;
-    }
+    },
+    changeTaskDeletingStatus: (state, action: {payload: LoadingStatus; type: string}) => {
+      state.taskDeletingStatus = action.payload;
+    },
   },
   extraReducers(builder) {
     builder
@@ -47,6 +51,13 @@ export const appProcess = createSlice({
       .addCase(deleteTask.fulfilled, (state, action) => {
         const id = action.payload;
         delete state.tasks[id];
+        state.taskDeletingStatus = LoadingStatus.Fulfilled;
+      })
+      .addCase(deleteTask.pending, (state) => {
+        state.taskDeletingStatus = LoadingStatus.Pending;
+      })
+      .addCase(deleteTask.rejected, (state) => {
+        state.taskDeletingStatus = LoadingStatus.Rejected;
       })
       .addCase(editTask.fulfilled, (state, action) => {
         const {id, task} = action.payload;
@@ -62,4 +73,4 @@ export const appProcess = createSlice({
   },
 });
 
-export const {changeTaskSendingStatus, changeTaskEditingStatus} = appProcess.actions;
+export const {changeTaskSendingStatus, changeTaskEditingStatus, changeTaskDeletingStatus} = appProcess.actions;

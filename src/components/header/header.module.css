@@ -1,6 +1,6 @@
 .header {
   display: flex;
-  margin-bottom: 5px;
+  margin-bottom: -5px;
   width: 100%;
 }
 

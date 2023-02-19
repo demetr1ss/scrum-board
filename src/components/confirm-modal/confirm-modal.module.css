@@ -65,59 +65,12 @@
 }
 
 .title {
-  margin-bottom: 10px;
+  font-family: 'PT-Sans', sans-serif;
 }
 
-.title,
-.description {
-  position: relative;
-}
-
-.title label,
-.description label {
+.buttonsWrapper {
   display: flex;
-  flex-direction: column;
-  text-align: left;
-}
-
-.description textarea {
-  min-height: 120px;
-  max-width: 100%;
-  min-width: 100%;
-  overflow-x: hidden;
-}
-
-.title .input {
-  font-size: 20px;
-}
-
-.input {
-  font: inherit;
-  font-size: 18px;
-  background: none;
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-  border: 2px solid #444444;
-  width: 100%;
-  height: 40px;
-  padding: 15px 10px;
-}
-
-.input:focus {
-  outline: none;
-}
-
-.input:focus-visible {
-  outline: none;
-  border: 2px solid #f50057;
-}
-
-.inputLabel {
-  font-family: 'PT Sans', sans-serif;
-  font-size: 14px;
-  padding-left: 10px;
-  padding-top: 10px;
+  justify-content: space-evenly;
 }
 
 .crossButton {
@@ -140,24 +93,28 @@
   fill: #444444;
 }
 
-.submitButton {
+.deleteButton {
   composes: button from '../add-task-button/add-task-button.module.css';
   box-sizing: border-box;
-  width: 50%;
+  width: 40%;
   margin-top: 40px;
 }
 
-.submitButton:disabled {
+.cancelButton {
+  composes: deleteButton;
+  background-color: #a7c957;
+  border-color: #a7c957;
+}
+
+.deleteButton:disabled,
+.cancelButton:disabled {
   opacity: 0.3;
   pointer-events: none;
 }
 
-.error {
-  font-family: 'PT Sans', sans-serif;
-  position: absolute;
-  margin: 0;
-  bottom: -20px;
-  right: 10px;
-  font-size: 13px;
-  color: #ff3333;
+.cancelButton:hover,
+.cancelButton:active,
+.cancelButton:focus-visible {
+  color: #a7c957;
 }
+

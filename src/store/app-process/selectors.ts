@@ -13,3 +13,5 @@ export const getTasksLoadingStatus = (state: StateType): LoadingStatus => state.
 export const getTaskSendingStatus = (state: StateType): LoadingStatus => state.taskSendingStatus;
 
 export const getTaskEditingStatus = (state: StateType): LoadingStatus => state.taskEditingStatus;
+
+export const getTaskDeletingStatus = (state: StateType): LoadingStatus => state.taskDeletingStatus;
