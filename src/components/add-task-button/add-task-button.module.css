@@ -12,6 +12,7 @@
   cursor: pointer;
   margin-bottom: 32px;
   text-transform: uppercase;
+  transition: background-color 0.2s ease, border 0.2s ease, color 0.2s ease;
 }
 
 .button:hover,
