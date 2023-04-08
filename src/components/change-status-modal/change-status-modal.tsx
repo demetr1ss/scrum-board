@@ -73,6 +73,10 @@ export default function ChangeStatusModal({
       [styles.isChecked]: status === item,
     });
 
+  const changeStatusButtonClassName = cn(styles.submitButton, {
+    [styles.buttonLoader]: isFormDisabled,
+  });
+
   return (
     <div className={`${styles.modal} ${isChangeStatusModalOpened ? styles.isActive : ''}`}>
       <div className={styles.wrapper}>
@@ -99,8 +103,8 @@ export default function ChangeStatusModal({
                 </li>
               ))}
             </ul>
-            <button className={styles.submitButton} type='submit' disabled={isFormDisabled}>
-              {isFormDisabled ? 'Saving...' : 'Save'}
+            <button className={changeStatusButtonClassName} type='submit' disabled={isFormDisabled}>
+              {isFormDisabled ? '' : 'Save'}
             </button>
           </form>
           <button

@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import TextareaAutosize from 'react-textarea-autosize';
 import styles from './add-new-task-modal-form.module.css';
+import cn from 'classnames';
 import {useEffect, useState} from 'react';
 import useKeydown from '../../hooks/use-key-down';
 import {useAppDispatch, useAppSelector} from '../../hooks';
@@ -59,6 +60,10 @@ export default function AddNewTaskModalForm({isAddNewTaskModalOpened: isModalOpe
     }
   }, [dispatch, setIsModalOpened, taskSendingStatus]);
 
+  const addButtonClassName = cn(styles.submitButton, {
+    [styles.buttonLoader]: isFormDisabled
+  });
+
   return (
     <div className={`${styles.modal} ${isModalOpened ? styles.isActive : ''}`}>
       <div className={styles.wrapper}>
@@ -96,8 +101,8 @@ export default function AddNewTaskModalForm({isAddNewTaskModalOpened: isModalOpe
               </label>
               {errors.description && <p className={styles.error}>Нужно указать описание</p>}
             </div>
-            <button className={styles.submitButton} type='submit' disabled={isFormDisabled}>
-              {isFormDisabled ? 'Adding..' : 'Add Task'}
+            <button className={addButtonClassName} type='submit' disabled={isFormDisabled}>
+              {isFormDisabled ? '' : 'Add Task'}
             </button>
           </form>
           <button

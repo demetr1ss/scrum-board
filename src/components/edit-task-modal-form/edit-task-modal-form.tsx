@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import TextareaAutosize from 'react-textarea-autosize';
 import styles from '../add-new-task-modal-form/add-new-task-modal-form.module.css';
+import cn from 'classnames';
 import {useEffect, useState} from 'react';
 import useKeydown from '../../hooks/use-key-down';
 import {useAppDispatch, useAppSelector} from '../../hooks';
@@ -17,7 +18,11 @@ type EditTaskModalFormPropsType = {
   currentTask: TaskType;
 };
 
-export default function EditTaskModalForm({isEditTaskModalOpened, setIsEditTaskModalOpened, currentTask}: EditTaskModalFormPropsType) {
+export default function EditTaskModalForm({
+  isEditTaskModalOpened,
+  setIsEditTaskModalOpened,
+  currentTask,
+}: EditTaskModalFormPropsType) {
   const dispatch = useAppDispatch();
   const [isFormDisabled, setIsFormDisabled] = useState(false);
   const taskEditingStatus = useAppSelector(getTaskEditingStatus);
@@ -61,6 +66,10 @@ export default function EditTaskModalForm({isEditTaskModalOpened, setIsEditTaskM
     }
   }, [dispatch, setIsEditTaskModalOpened, taskEditingStatus]);
 
+  const editButtonClassName = cn(styles.submitButton, {
+    [styles.buttonLoader]: isFormDisabled,
+  });
+
   return (
     <div className={`${styles.modal} ${isEditTaskModalOpened ? styles.isActive : ''}`}>
       <div className={styles.wrapper}>
@@ -99,8 +108,8 @@ export default function EditTaskModalForm({isEditTaskModalOpened, setIsEditTaskM
               </label>
               {errors.description && <p className={styles.error}>Нужно указать описание</p>}
             </div>
-            <button className={styles.submitButton} type='submit' disabled={isFormDisabled}>
-              {isFormDisabled ? 'Saving...' : 'Save'}
+            <button className={editButtonClassName} type='submit' disabled={isFormDisabled}>
+              {isFormDisabled ? '' : 'Save'}
             </button>
           </form>
           <button
