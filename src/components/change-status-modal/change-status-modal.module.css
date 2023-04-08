@@ -1,0 +1,83 @@
+.modal {
+  composes: modal from '../add-new-task-modal-form/add-new-task-modal-form.module.css';
+}
+
+.isActive {
+  composes: isActive from '../add-new-task-modal-form/add-new-task-modal-form.module.css';
+}
+
+.wrapper {
+  composes: wrapper from '../add-new-task-modal-form/add-new-task-modal-form.module.css';
+}
+
+.overlay {
+  composes: overlay from '../add-new-task-modal-form/add-new-task-modal-form.module.css';
+}
+
+.content {
+  composes: content from '../add-new-task-modal-form/add-new-task-modal-form.module.css';
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  composes: title from '../add-new-task-modal-form/add-new-task-modal-form.module.css';
+  margin-bottom: 40px;
+}
+
+.controlsList {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  justify-content: space-evenly;
+}
+
+.controlsItem {
+  width: 100%;
+  margin-right: 15px;
+}
+
+.controlsItem:last-child {
+  margin-right: 0;
+}
+
+.input {
+  font: inherit;
+  font-size: 18px;
+  background: none;
+  padding: 0;
+  margin: 0;
+}
+
+.inputLabel {
+  display: block;
+  cursor: pointer;
+  font-family: 'PT Sans', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #f50057;
+  width: 100%;
+  padding: 10px 0;
+  border: 2px solid #f50057;
+}
+
+.isChecked {
+  background-color: #f50057;
+  color: #ffffff;
+}
+
+.crossButton {
+  composes: crossButton from '../add-new-task-modal-form/add-new-task-modal-form.module.css';
+}
+
+.buttonLogo {
+  composes: buttonLogo from '../add-new-task-modal-form/add-new-task-modal-form.module.css';
+}
+
+.submitButton {
+  composes: submitButton from '../add-new-task-modal-form/add-new-task-modal-form.module.css';
+}

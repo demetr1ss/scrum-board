@@ -11,11 +11,13 @@ import Task from '../task/task';
 import styles from './main.module.css';
 import EditTaskModalForm from '../edit-task-modal-form/edit-task-modal-form';
 import ConfirmModal from '../confirm-modal/confirm-modal';
+import ChangeStatusModal from '../change-status-modal/change-status-modal';
 
 export default function Main() {
   const [isAddNewTaskModalOpened, setIsAddNewTaskModalOpened] = useState(false);
   const [isEditTaskModalOpened, setIsEditTaskModalOpened] = useState(false);
   const [isConfirmModalOpened, setIsConfirmModalOpened] = useState(false);
+  const [isChangeStatusModalOpened, setIsChangeStatusModalOpened] = useState(false);
   const [currentDroppableBoard, setCurrentDroppableBoard] = useState<string>('');
   const [currentTask, setCurrentTask] = useState({} as TaskType);
 
@@ -52,6 +54,7 @@ export default function Main() {
                       setCurrentTask={setCurrentTask}
                       setIsEditTaskModalOpened={setIsEditTaskModalOpened}
                       setIsConfirmModalOpened={setIsConfirmModalOpened}
+                      setIsChangeStatusModalOpened={setIsChangeStatusModalOpened}
                     />
                   ) : (
                     ''
@@ -89,6 +92,17 @@ export default function Main() {
             <ConfirmModal
               isConfirmModalOpened={isConfirmModalOpened}
               setIsConfirmModalOpened={setIsConfirmModalOpened}
+              currentTask={currentTask}
+            />
+          </RemoveScroll>
+        </FocusLock>
+      )}
+      {isChangeStatusModalOpened && (
+        <FocusLock>
+          <RemoveScroll enabled={isChangeStatusModalOpened}>
+            <ChangeStatusModal
+              isChangeStatusModalOpened={isChangeStatusModalOpened}
+              setIsChangeStatusModalOpened={setIsChangeStatusModalOpened}
               currentTask={currentTask}
             />
           </RemoveScroll>
