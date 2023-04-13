@@ -15,8 +15,6 @@ export type TaskNoIdType = {
   description: string;
 };
 
-export type TasksType = TaskType[];
-
 export type FetchingTasksType = {
   [key: string]: TaskNoIdType;
 };
@@ -25,3 +23,5 @@ export type SendTaskType = {
   id: string;
   task: TaskNoIdType;
 };
+
+export type TasksType = TaskType[];
