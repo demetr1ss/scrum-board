@@ -1,12 +1,3 @@
-export type TaskType = {
-  completed: boolean;
-  current: boolean;
-  scheduled: boolean;
-  id: string;
-  title: string;
-  description: string;
-};
-
 export type TaskNoIdType = {
   completed: boolean;
   current: boolean;
@@ -14,6 +5,10 @@ export type TaskNoIdType = {
   title: string;
   description: string;
 };
+
+export interface TaskType extends TaskNoIdType {
+  id: string;
+}
 
 export type FetchingTasksType = {
   [key: string]: TaskNoIdType;
