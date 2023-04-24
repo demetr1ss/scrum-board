@@ -58,7 +58,7 @@ export default function Task({
 
   return (
     <li
-      className={`${styles.item}`}
+      className={styles.item}
       onMouseOver={() => setIsToolsVisible(true)}
       onMouseLeave={() => setIsToolsVisible(false)}
       draggable
