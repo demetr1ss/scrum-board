@@ -4,6 +4,7 @@
   align-items: center;
   min-height: 100vh;
   margin: 0 auto;
+  background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
 }
 
 .visually-hidden {

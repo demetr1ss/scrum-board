@@ -1,12 +1,11 @@
 .header {
   display: flex;
-  margin-bottom: -5px;
   width: 100%;
 }
 
-.logo {
-  margin: -12px auto 0;
-  padding: 0;
-  width: 80px;
-  height: 80px;
+.title {
+  font-family: 'PT Sans', sans-serif;
+  font-size: 46px;
+  margin: 15px auto 32px;
+  letter-spacing: 4px;
 }

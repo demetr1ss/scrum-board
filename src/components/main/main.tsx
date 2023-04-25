@@ -30,7 +30,6 @@ export default function Main() {
 
   return (
     <main className={styles.main}>
-      <h1 className={styles.title}>Scrum board</h1>
       <AddTaskButton setIsModalOpened={setIsAddNewTaskModalOpened} />
       <section className='main__board board'>
         <ul className={styles.list}>
