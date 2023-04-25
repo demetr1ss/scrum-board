@@ -13,14 +13,11 @@
   box-shadow: 16px 16px 2px rgb(32 33 37 / 6%);
 }
 
-.item:active {
-  cursor: grabbing;
-}
-
 .tools {
   position: absolute;
   top: 0;
   right: 0;
+  z-index: 2;
 }
 
 .toolButton {
