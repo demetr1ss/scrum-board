@@ -2,6 +2,14 @@
   margin-bottom: 6vw;
 }
 
+.dragging {
+  -webkit-opacity: 0;
+}
+
+.dragging:-webkit-drag {
+  -webkit-opacity: 1;
+}
+
 .item:hover > div,
 .item:focus-visible > div {
   transform: translateY(-8px);

@@ -2,6 +2,7 @@ import {useState} from 'react';
 import {useAppDispatch} from '../../hooks';
 import {editTask} from '../../store/api-actions';
 import {TaskType} from '../../types/types';
+import cn from 'classnames';
 import styles from './task.module.css';
 
 type TaskPropsType = {
@@ -25,6 +26,7 @@ export default function Task({
 }: TaskPropsType) {
   const dispatch = useAppDispatch();
   const [isToolsVisible, setIsToolsVisible] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
   const {title, description} = task;
 
   const onEditButtonClick = () => {
@@ -43,6 +45,8 @@ export default function Task({
   };
 
   const dragEndHandler = (item: TaskType, currentBoard: string) => {
+    setIsDragging(false);
+
     if (currentBoard === currentDroppableBoard) {
       return;
     }
@@ -56,14 +60,24 @@ export default function Task({
     );
   };
 
+  const dragStartHandler = (e: React.DragEvent<HTMLLIElement>) => {
+    setIsDragging(true);
+    e.dataTransfer.effectAllowed = 'all';
+  };
+
+  const itemClassName = cn(styles.item, {
+    [styles.dragging]: isDragging,
+  });
+
   return (
     <li
-      className={styles.item}
+      className={itemClassName}
       onMouseOver={() => setIsToolsVisible(true)}
       onMouseLeave={() => setIsToolsVisible(false)}
       onFocus={() => setIsToolsVisible(true)}
       draggable
       onDragEnd={() => dragEndHandler(task, fieldName)}
+      onDragStart={(e) => dragStartHandler(e)}
       tabIndex={0}
     >
       <div className={`${styles[fieldName]} ${styles.wrapper}`}>
