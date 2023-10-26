@@ -6,12 +6,20 @@ export type TaskNoIdType = {
   description: string;
 };
 
+export type QuestionType = {
+  question: string;
+}
+
 export interface TaskType extends TaskNoIdType {
   id: string;
 }
 
 export type FetchingTasksType = {
   [key: string]: TaskNoIdType;
+};
+
+export type FetchingQuestionsType = {
+  [key: string]: QuestionType[];
 };
 
 export type SendTaskType = {

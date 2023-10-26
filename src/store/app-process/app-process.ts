@@ -1,10 +1,12 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {LoadingStatus} from '../../const/const';
-import {FetchingTasksType} from '../../types/types';
-import {deleteTask, editTask, fetchTasks, sendTask} from '../api-actions';
+import {FetchingQuestionsType, FetchingTasksType} from '../../types/types';
+import {deleteTask, editTask, fetchTasks, sendTask, fetchQuestions} from '../api-actions';
 
 const initialState = {
   tasks: {} as FetchingTasksType,
+  questions: {} as FetchingQuestionsType,
+  questionsLoadingStatus: LoadingStatus.Idle,
   tasksLoadingStatus: LoadingStatus.Idle,
   taskSendingStatus: LoadingStatus.Idle,
   taskEditingStatus: LoadingStatus.Idle,
@@ -69,6 +71,16 @@ export const appProcess = createSlice({
       })
       .addCase(editTask.rejected, (state) => {
         state.taskEditingStatus = LoadingStatus.Rejected;
+      })
+      .addCase(fetchQuestions.fulfilled, (state, action) => {
+        state.questions = action.payload;
+        state.questionsLoadingStatus = LoadingStatus.Fulfilled;
+      })
+      .addCase(fetchQuestions.pending, (state) => {
+        state.questionsLoadingStatus = LoadingStatus.Pending;
+      })
+      .addCase(fetchQuestions.rejected, (state) => {
+        state.questionsLoadingStatus = LoadingStatus.Rejected;
       });
   },
 });

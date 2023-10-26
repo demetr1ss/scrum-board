@@ -1,7 +1,7 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AxiosInstance} from 'axios';
 import {AppDispatchType, StateType} from '../types/store-type';
-import {FetchingTasksType, TaskNoIdType, SendTaskType, TaskType} from '../types/types';
+import {FetchingTasksType, TaskNoIdType, SendTaskType, TaskType, FetchingQuestionsType} from '../types/types';
 
 export const fetchTasks = createAsyncThunk<
   FetchingTasksType,
@@ -66,4 +66,18 @@ export const editTask = createAsyncThunk<
   };
 
   return payload;
+});
+
+export const fetchQuestions = createAsyncThunk<
+  FetchingQuestionsType,
+  undefined,
+  {
+    dispatch: AppDispatchType;
+    state: StateType;
+    extra: AxiosInstance;
+  }
+>('data/getRandomQuestion', async (_arg, {extra: api}) => {
+  const {data} = await api.get<FetchingQuestionsType>('questions.json');
+
+  return data ? data : {};
 });

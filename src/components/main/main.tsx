@@ -3,7 +3,7 @@ import FocusLock from 'react-focus-lock';
 import {RemoveScroll} from 'react-remove-scroll';
 import {AdaptedTitle, Title} from '../../const/const';
 import {useAppSelector} from '../../hooks';
-import {getTasks} from '../../store/app-process/selectors';
+import {getQuestions, getTasks} from '../../store/app-process/selectors';
 import {TaskType} from '../../types/types';
 import AddTaskButton from '../add-task-button/add-task-button';
 import AddNewTaskModalForm from '../add-new-task-modal-form/add-new-task-modal-form';
@@ -12,9 +12,12 @@ import styles from './main.module.css';
 import EditTaskModalForm from '../edit-task-modal-form/edit-task-modal-form';
 import ConfirmModal from '../confirm-modal/confirm-modal';
 import ChangeStatusModal from '../change-status-modal/change-status-modal';
+import GetRandomQuestionButton from '../get-random-question-button/get-random-question-button';
+import RandomQuestionModal from '../random-question-modal/random-question-modal';
 
 export default function Main() {
   const [isAddNewTaskModalOpened, setIsAddNewTaskModalOpened] = useState(false);
+  const [isGetRandomQuestionModalOpened, setIsGetRandomQuestionModalOpened] = useState(false);
   const [isEditTaskModalOpened, setIsEditTaskModalOpened] = useState(false);
   const [isConfirmModalOpened, setIsConfirmModalOpened] = useState(false);
   const [isChangeStatusModalOpened, setIsChangeStatusModalOpened] = useState(false);
@@ -27,11 +30,17 @@ export default function Main() {
 
   const tasks = useAppSelector(getTasks);
   const fields = Object.keys(Title);
+  const questions = useAppSelector(getQuestions);
+
+  function getRandomQuestion() {
+    const randomIndex = Math.floor(Math.random() * questions.length);
+    return questions[randomIndex].question;
+  }
 
   return (
     <main className={styles.main}>
       <AddTaskButton setIsModalOpened={setIsAddNewTaskModalOpened} />
-      <section className='main__board board'>
+      <section className={styles.board}>
         <ul className={styles.list}>
           {fields.map((fieldName) => (
             <li
@@ -64,12 +73,24 @@ export default function Main() {
           ))}
         </ul>
       </section>
+      <GetRandomQuestionButton setIsModalOpened={setIsGetRandomQuestionModalOpened}/>
       {isAddNewTaskModalOpened && (
         <FocusLock>
           <RemoveScroll enabled={isAddNewTaskModalOpened}>
             <AddNewTaskModalForm
               isAddNewTaskModalOpened={isAddNewTaskModalOpened}
               setIsAddNewTaskModalOpened={setIsAddNewTaskModalOpened}
+            />
+          </RemoveScroll>
+        </FocusLock>
+      )}
+      {isGetRandomQuestionModalOpened && (
+        <FocusLock>
+          <RemoveScroll enabled={isGetRandomQuestionModalOpened}>
+            <RandomQuestionModal
+              isGetRandomQuestionModalOpened={isGetRandomQuestionModalOpened}
+              setIsGetRandomQuestionModalOpened={setIsGetRandomQuestionModalOpened}
+              question={getRandomQuestion()}
             />
           </RemoveScroll>
         </FocusLock>
