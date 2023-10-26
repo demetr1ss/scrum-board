@@ -32,11 +32,6 @@ export default function Main() {
   const fields = Object.keys(Title);
   const questions = useAppSelector(getQuestions);
 
-  function getRandomQuestion() {
-    const randomIndex = Math.floor(Math.random() * questions.length);
-    return questions[randomIndex].question;
-  }
-
   return (
     <main className={styles.main}>
       <AddTaskButton setIsModalOpened={setIsAddNewTaskModalOpened} />
@@ -73,7 +68,7 @@ export default function Main() {
           ))}
         </ul>
       </section>
-      <GetRandomQuestionButton setIsModalOpened={setIsGetRandomQuestionModalOpened}/>
+      <GetRandomQuestionButton onClick={() => setIsGetRandomQuestionModalOpened(true)}/>
       {isAddNewTaskModalOpened && (
         <FocusLock>
           <RemoveScroll enabled={isAddNewTaskModalOpened}>
@@ -90,7 +85,7 @@ export default function Main() {
             <RandomQuestionModal
               isGetRandomQuestionModalOpened={isGetRandomQuestionModalOpened}
               setIsGetRandomQuestionModalOpened={setIsGetRandomQuestionModalOpened}
-              question={getRandomQuestion()}
+              questions={questions}
             />
           </RemoveScroll>
         </FocusLock>

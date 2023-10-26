@@ -1,17 +1,25 @@
+import {useState} from 'react';
+import {QuestionType} from '../../types/types';
 import styles from '../add-new-task-modal-form/add-new-task-modal-form.module.css';
 import GetRandomQuestionButton from '../get-random-question-button/get-random-question-button';
 
 type RandomQuestionModalPropsType = {
   isGetRandomQuestionModalOpened: boolean;
   setIsGetRandomQuestionModalOpened: (status: boolean) => void;
-  question: string;
+  questions: QuestionType[];
 };
 
 export default function RandomQuestionModal({
   isGetRandomQuestionModalOpened,
   setIsGetRandomQuestionModalOpened,
-  question,
+  questions
 }: RandomQuestionModalPropsType) {
+  function getRandomQuestion() {
+    const randomIndex = Math.floor(Math.random() * questions.length);
+    return questions[randomIndex].question;
+  }
+  const [question, setQuestion] = useState(getRandomQuestion());
+
   return (
     <div className={`${styles.modal} ${isGetRandomQuestionModalOpened ? styles.isActive : ''}`}>
       <div className={styles.wrapper}>
@@ -21,7 +29,7 @@ export default function RandomQuestionModal({
           <p className={styles.text}>{question}?</p>
           <GetRandomQuestionButton
             title='Другой вопрос'
-            setIsModalOpened={setIsGetRandomQuestionModalOpened}
+            onClick={() => setQuestion(getRandomQuestion())}
           />
           <button
             className={styles.crossButton}
