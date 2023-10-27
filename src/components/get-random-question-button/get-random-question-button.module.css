@@ -4,13 +4,13 @@
   font-size: 18px;
   color: #ffffff;
   padding: 12px 18px;
-  width: calc(15vw + 12px);
-  max-width: 504px;
+  width: calc(80vw + 12px);
+  max-width: 304px;
   background: none;
   background-color: #f50057;
   border: 3px solid #f50057;
   cursor: pointer;
-  margin-bottom: 32px;
+  margin-bottom: 1rem;
   text-transform: uppercase;
   transition: background-color 0.2s ease, border 0.2s ease, color 0.2s ease;
   margin-top: auto;
