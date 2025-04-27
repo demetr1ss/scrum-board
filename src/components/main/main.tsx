@@ -1,10 +1,13 @@
-import {DragEvent, useState} from 'react';
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+import { useState } from 'react';
+import { DragDropContext, Droppable, DropResult, DroppableProvided } from 'react-beautiful-dnd';
 import FocusLock from 'react-focus-lock';
-import {RemoveScroll} from 'react-remove-scroll';
-import {AdaptedTitle, Title} from '../../const/const';
-import {useAppSelector} from '../../hooks';
-import {getQuestions, getTasks} from '../../store/app-process/selectors';
-import {TaskType} from '../../types/types';
+import { RemoveScroll } from 'react-remove-scroll';
+import { AdaptedTitle, Title } from '../../const/const';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { getQuestions, getTasks } from '../../store/app-process/selectors';
+import { TaskType } from '../../types/types';
 import AddTaskButton from '../add-task-button/add-task-button';
 import AddNewTaskModalForm from '../add-new-task-modal-form/add-new-task-modal-form';
 import Task from '../task/task';
@@ -14,60 +17,94 @@ import ConfirmModal from '../confirm-modal/confirm-modal';
 import ChangeStatusModal from '../change-status-modal/change-status-modal';
 import GetRandomQuestionButton from '../get-random-question-button/get-random-question-button';
 import RandomQuestionModal from '../random-question-modal/random-question-modal';
+import { editTask } from '../../store/api-actions';
 
 export default function Main() {
+  const dispatch = useAppDispatch();
   const [isAddNewTaskModalOpened, setIsAddNewTaskModalOpened] = useState(false);
   const [isGetRandomQuestionModalOpened, setIsGetRandomQuestionModalOpened] = useState(false);
   const [isEditTaskModalOpened, setIsEditTaskModalOpened] = useState(false);
   const [isConfirmModalOpened, setIsConfirmModalOpened] = useState(false);
   const [isChangeStatusModalOpened, setIsChangeStatusModalOpened] = useState(false);
-  const [currentDroppableBoard, setCurrentDroppableBoard] = useState<string>('');
   const [currentTask, setCurrentTask] = useState({} as TaskType);
-
-  const dragOverHandler = (e: DragEvent<HTMLLIElement>) => {
-    e.preventDefault();
-  };
 
   const tasks = useAppSelector(getTasks);
   const fields = Object.keys(Title);
   const questions = useAppSelector(getQuestions);
 
+  const handleDragEnd = (result: DropResult) => {
+    const { destination, source, draggableId } = result;
+
+    // Если нет места для перемещения или перемещение в то же место - ничего не делаем
+    if (!destination ||
+        (destination.droppableId === source.droppableId &&
+         destination.index === source.index)) {
+      return;
+    }
+
+    // Найдем перетаскиваемую задачу
+    const task = tasks.find((t) => t.id === draggableId);
+    if (!task) {
+      return;
+    }
+
+    // Убедимся, что droppableId - это ключ, который соответствует полям задачи
+    const sourceId = source.droppableId as keyof Omit<TaskType, 'id' | 'title' | 'description'>;
+    const destinationId = destination.droppableId as keyof Omit<TaskType, 'id' | 'title' | 'description'>;
+
+    // Обновляем задачу, устанавливая новый статус
+    dispatch(
+      editTask({
+        ...task,
+        [sourceId]: false,
+        [destinationId]: true,
+      })
+    );
+  };
+
   return (
     <main className={styles.main}>
       <AddTaskButton setIsModalOpened={setIsAddNewTaskModalOpened} />
-      <section className={styles.board}>
-        <ul className={styles.list}>
-          {fields.map((fieldName) => (
-            <li
-              className={`${styles.item} ${styles[fieldName]}`}
-              key={fieldName}
-              id={fieldName}
-              onDragOver={(e) => dragOverHandler(e)}
-              onDrop={() => setCurrentDroppableBoard(fieldName)}
-            >
-              <h2 className={styles.itemTitle}>{AdaptedTitle[fieldName]}</h2>
-              <ul className={styles.itemList}>
-                {tasks?.map((task) =>
-                  task[fieldName as keyof typeof task] === true ? (
-                    <Task
-                      key={task.id}
-                      task={task}
-                      fieldName={fieldName}
-                      currentDroppableBoard={currentDroppableBoard}
-                      setCurrentTask={setCurrentTask}
-                      setIsEditTaskModalOpened={setIsEditTaskModalOpened}
-                      setIsConfirmModalOpened={setIsConfirmModalOpened}
-                      setIsChangeStatusModalOpened={setIsChangeStatusModalOpened}
-                    />
-                  ) : (
-                    ''
-                  )
-                )}
-              </ul>
-            </li>
-          ))}
-        </ul>
-      </section>
+      <DragDropContext onDragEnd={handleDragEnd}>
+        <section className={styles.board}>
+          <ul className={styles.list}>
+            {fields.map((fieldName) => (
+              <li
+                className={`${styles.item} ${styles[fieldName as keyof typeof styles]}`}
+                key={fieldName}
+                id={fieldName}
+              >
+                <h2 className={styles.itemTitle}>{AdaptedTitle[fieldName]}</h2>
+                <Droppable droppableId={fieldName}>
+                  {(provided: DroppableProvided) => (
+                    <ul
+                      className={styles.itemList}
+                      ref={provided.innerRef}
+                      {...provided.droppableProps}
+                    >
+                      {tasks?.map((task, index) =>
+                        task[fieldName as keyof TaskType] === true ? (
+                          <Task
+                            key={task.id}
+                            task={task}
+                            index={index}
+                            fieldName={fieldName}
+                            setCurrentTask={setCurrentTask}
+                            setIsEditTaskModalOpened={setIsEditTaskModalOpened}
+                            setIsConfirmModalOpened={setIsConfirmModalOpened}
+                            setIsChangeStatusModalOpened={setIsChangeStatusModalOpened}
+                          />
+                        ) : null
+                      )}
+                      {provided.placeholder}
+                    </ul>
+                  )}
+                </Droppable>
+              </li>
+            ))}
+          </ul>
+        </section>
+      </DragDropContext>
       <GetRandomQuestionButton onClick={() => setIsGetRandomQuestionModalOpened(true)}/>
       {isAddNewTaskModalOpened && (
         <FocusLock>

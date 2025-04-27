@@ -46,14 +46,59 @@
 }
 
 .itemTitle {
-  font-family: 'PT Sans', sans-serif;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
   font-size: 10vw;
   margin: 6vw 0 6vw;
+  color: #333333;
 }
 
 .itemList {
   list-style-type: none;
-  padding: 0;
+  padding: 10px;
+  min-height: 100px;
+  transition: background-color 0.25s ease, box-shadow 0.25s ease;
+  border-radius: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: flex-start;
+  justify-content: center;
+  position: relative;
+}
+
+/* Скрываем placeholder для предотвращения смещения карточек */
+.itemList [data-rbd-placeholder-context-id] {
+  display: none !important;
+}
+
+/* Base styles for droppable areas */
+.itemList[data-rbd-droppable-id="scheduled"] {
+  background-color: rgba(252, 246, 189, 0.2);
+}
+
+.itemList[data-rbd-droppable-id="current"] {
+  background-color: rgba(228, 193, 249, 0.2);
+}
+
+.itemList[data-rbd-droppable-id="completed"] {
+  background-color: rgba(208, 244, 222, 0.2);
+}
+
+/* Styles for when a draggable item is over the drop area - Trello-like highlight */
+.itemList[data-rbd-droppable-id="scheduled"][data-rbd-droppable-state="hover"] {
+  background-color: rgba(252, 246, 189, 0.4);
+  box-shadow: inset 0 0 0 2px rgba(246, 229, 141, 0.9);
+}
+
+.itemList[data-rbd-droppable-id="current"][data-rbd-droppable-state="hover"] {
+  background-color: rgba(228, 193, 249, 0.4);
+  box-shadow: inset 0 0 0 2px rgba(216, 169, 244, 0.9);
+}
+
+.itemList[data-rbd-droppable-id="completed"][data-rbd-droppable-state="hover"] {
+  background-color: rgba(208, 244, 222, 0.4);
+  box-shadow: inset 0 0 0 2px rgba(181, 234, 202, 0.9);
 }
 
 @media (min-width: 520px) {
@@ -84,6 +129,9 @@
     gap: 20px;
     flex-wrap: wrap;
     justify-content: center;
+    border-radius: 8px;
+    padding: 15px;
+    min-height: 300px;
   }
 
   .itemTitle {

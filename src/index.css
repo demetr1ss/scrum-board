@@ -1,47 +1,73 @@
+/* Poppins font declarations */
 @font-face {
-  font-family: 'PT Sans';
+  font-family: 'Poppins';
   font-style: normal;
   font-weight: 400;
-  src: url('../public/fonts/ptsans.woff') format('woff');
+  src: url('../public/fonts/poppins/pxiEyp8kv8JHgFVrJJfecg.woff2') format('woff2');
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'PT Sans';
+  font-family: 'Poppins';
   font-style: normal;
-  font-weight: 400;
-  src: url('../public/fonts/ptsans.woff2') format('woff2');
+  font-weight: 500;
+  src: url('../public/fonts/poppins/pxiByp8kv8JHgFVrLGT9Z1xlFQ.woff2') format('woff2');
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Virgil';
+  font-family: 'Poppins';
   font-style: normal;
-  font-weight: 400;
-  src: url('../public/fonts/Virgil.woff2') format('woff2');
+  font-weight: 600;
+  src: url('../public/fonts/poppins/pxiByp8kv8JHgFVrLEj6Z1xlFQ.woff2') format('woff2');
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'PT Sans';
+  font-family: 'Poppins';
   font-style: normal;
   font-weight: 700;
-  src: url('../public/fonts/ptsansbold.woff') format('woff');
+  src: url('../public/fonts/poppins/pxiByp8kv8JHgFVrLDD4Z1xlFQ.woff2') format('woff2');
+  font-display: swap;
+}
+
+/* Roboto font declarations */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 300;
+  src: url('../public/fonts/roboto/KFOlCnqEu92Fr1MmSU5fBBc4.woff2') format('woff2');
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'PT Sans';
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../public/fonts/roboto/KFOmCnqEu92Fr1Mu4mxK.woff2') format('woff2');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  src: url('../public/fonts/roboto/KFOlCnqEu92Fr1MmEU9fBBc4.woff2') format('woff2');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Roboto';
   font-style: normal;
   font-weight: 700;
-  src: url('../public/fonts/ptsansbold.woff2') format('woff2');
+  src: url('../public/fonts/roboto/KFOlCnqEu92Fr1MmWUlfBBc4.woff2') format('woff2');
   font-display: swap;
 }
 
 html,
 body {
   margin: 0;
-  font-family: 'Virgil', sans-serif;
+  font-family: 'Roboto', 'Arial', sans-serif;
   font-weight: 400;
   font-size: 16px;
   color: #444444;
@@ -51,6 +77,10 @@ body {
   word-break: keep-all;
   word-wrap: break-word;
   -webkit-tap-highlight-color: transparent;
+}
+
+h1, h2, h3, h4, h5, h6, button {
+  font-family: 'Poppins', 'Roboto', sans-serif;
 }
 
 .visually-hidden {
